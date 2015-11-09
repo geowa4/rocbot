@@ -1,0 +1,22 @@
+- name: base
+  hosts: all
+  user: root
+  roles:
+    - epel
+    - vim
+    - docker
+
+- name: create non-root user for hubot
+  hosts: hubot
+  user: root
+  roles:
+    - role: nonroot_user
+      username: rocbot
+
+- name: rocbot
+  hosts: hubot
+  user: rocbot
+  roles:
+    - vim
+    - rocbot
+

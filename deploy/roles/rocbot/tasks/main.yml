@@ -1,0 +1,15 @@
+- name: configure systemd for rocbot
+  sudo: yes
+  template: src=rocbot.service dest=/etc/systemd/system/rocbot.service
+  notify:
+    - reload systemd
+    - restart rocbot
+
+- name: start rocbot
+  sudo: yes
+  service: name=rocbot state=started
+
+- name: enable rocbot
+  sudo: yes
+  service: name=rocbot enabled=yes
+

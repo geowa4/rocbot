@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+exec node_modules/.bin/hubot --name "rocbot" "$@"
+

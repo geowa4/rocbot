@@ -1,0 +1,8 @@
+- name: reload systemd
+  sudo: yes
+  shell: systemctl daemon-reload
+
+- name: restart rocbot
+  sudo: yes
+  service: name=rocbot state=restarted
+

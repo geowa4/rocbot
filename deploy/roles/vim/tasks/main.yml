@@ -1,0 +1,16 @@
+- name: install vim
+  yum: name={{ item }} state=present
+  with_items:
+    - vim-enhanced
+    - unzip
+  when: ansible_ssh_user == 'root'
+
+- name: make vim config directory
+  file: path=~/.vim state=directory
+
+- name: download vim-sensible
+  get_url: url=http://www.vim.org/scripts/download_script.php?src_id=21821 dest=~/.vim/sensible.zip
+
+- name: extract vim-sensible
+  unarchive: src=~/.vim/sensible.zip dest=~/.vim copy=no creates=~/.vim/plugin/sensible.vim
+

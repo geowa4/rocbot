@@ -1,0 +1,25 @@
+[Unit]
+Description=rocbot
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill rocbot
+ExecStartPre=-/usr/bin/docker rm -f rocbot
+ExecStartPre=-/usr/bin/flock /tmp/pull.lock /usr/bin/timeout 5m /usr/bin/docker pull geowa4/rocbot
+ExecStart=/usr/bin/docker run \
+  --name rocbot \
+  -h %H \
+  -e SLACK_URL={{ slack_url }} \
+  -e HUBOT_SLACK_TOKEN={{ hubot_slack_token }} \
+  -e SLACK_API_TOKEN={{ slack_api_token }} \
+  geowa4/rocbot
+ExecStartPost=
+ExecStop=/usr/bin/docker stop rocbot
+ExecStopPost=
+
+[Install]
+WantedBy=multi-user.target
+
