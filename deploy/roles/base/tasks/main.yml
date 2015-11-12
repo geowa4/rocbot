@@ -1,0 +1,16 @@
+- name: trust sysdig key
+  apt_key: url=https://s3.amazonaws.com/download.draios.com/DRAIOS-GPG-KEY.public state=present
+
+- name: add sysdig repository
+  apt_repository: repo='deb http://download.draios.com/stable/deb stable-$(ARCH)/' state=present
+
+- name: update apt cache
+  apt: update_cache=yes
+
+- name: install packages
+  apt: name={{ item }} state=present
+  with_items:
+    - vim
+    - curl
+    - linux-headers-4.2.0-16-generic
+    - sysdig

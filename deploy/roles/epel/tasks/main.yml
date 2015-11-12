@@ -1,3 +1,0 @@
-- name: enable epel
-  shell: rpm -Uvh {{ epel_url }} creates=/etc/yum.repos.d/epel.repo
-

@@ -1,10 +1,10 @@
-- name: base
-  hosts: all
+- name: install ansible requirements
+  hosts: hubot
   user: root
-  roles:
-    - epel
-    - vim
-    - docker
+  gather_facts: no
+  tasks:
+    - name: install python
+      raw: apt-get install -y python
 
 - name: create non-root user for hubot
   hosts: hubot
@@ -16,7 +16,16 @@
 - name: rocbot
   hosts: hubot
   user: rocbot
+  become: yes
   roles:
-    - vim
+    - base
+    - vim-config
+    - docker
     - rocbot
+
+- name: rocbot user config
+  hosts: hubot
+  user: rocbot
+  roles:
+    - vim-config
 

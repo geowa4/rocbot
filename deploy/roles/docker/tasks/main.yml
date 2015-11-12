@@ -1,12 +1,9 @@
-- name: add docker repo
-  copy: src=docker.repo dest=/etc/yum.repos.d/docker.repo
-
 - name: install docker
-  yum: name=docker-engine state=installed
-
-- name: start docker
-  service: name=docker state=started
+  shell: curl -sSL https://get.docker.com/ | sh > ~/docker_installation creates=~/docker_installation
 
 - name: enable docker
   service: name=docker enabled=yes
+
+- name: start docker
+  service: name=docker state=started
 

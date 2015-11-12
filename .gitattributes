@@ -1,0 +1,2 @@
+deploy/hosts/servers filter=git-crypt diff=git-crypt
+deploy/hosts/group_vars/hubot/secret.yml filter=git-crypt diff=git-crypt

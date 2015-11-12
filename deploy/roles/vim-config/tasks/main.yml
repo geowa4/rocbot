@@ -1,0 +1,6 @@
+- name: make vim config directory
+  file: path=~/.vim/plugin state=directory
+
+- name: install vim-sensible
+  copy: src=sensible.vim dest=~/.vim/plugin/sensible.vim
+
