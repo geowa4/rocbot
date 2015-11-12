@@ -1,5 +1,3 @@
 node_modules
 .DS_Store*
 .hubot_history
-deploy/hosts/static
-deploy/hosts/group_vars/hubot/encrypted.yml
