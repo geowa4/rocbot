@@ -3,9 +3,11 @@
 
 - name: add sysdig repository
   apt_repository: repo='deb http://download.draios.com/stable/deb stable-$(ARCH)/' state=present
+  register: add_sysdig
 
 - name: update apt cache
   apt: update_cache=yes
+  when: add_sysdig.changed
 
 - name: install packages
   apt: name={{ item }} state=present
