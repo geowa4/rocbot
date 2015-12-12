@@ -1,3 +1,6 @@
+nonroot_users:
+  - geowa4
+  - rocbot
 github_usernames:
   - geowa4
 

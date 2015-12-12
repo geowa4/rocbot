@@ -1,0 +1,6 @@
+- name: make vim config directory
+  file: path=/home/{{ ansible_ssh_user }}/.vim/plugin owner={{ ansible_ssh_user }} state=directory
+
+- name: install vim-sensible
+  copy: src=sensible.vim dest=/home/{{ ansible_ssh_user }}/.vim/plugin/sensible.vim owner={{ ansible_ssh_user }}
+

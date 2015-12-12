@@ -1,0 +1,17 @@
+- name: create user
+  user: name={{ item }} shell=/bin/bash state=present
+  with_items: nonroot_users
+
+- name: add user to sudoers
+  lineinfile:
+    line: '{{ item }}   ALL=(ALL) NOPASSWD: ALL'
+    dest: /etc/sudoers
+    state: present
+  with_items: nonroot_users
+
+- name: add ssh keys
+  authorized_key: user={{ item.0 }} key=https://github.com/{{ item.1 }}.keys
+  with_nested:
+    - '{{ nonroot_users }}'
+    - '{{ github_usernames }}'
+

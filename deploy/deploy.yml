@@ -1,31 +1,37 @@
 - name: install ansible requirements
-  hosts: hubot
+  hosts: all
   user: root
   gather_facts: no
   tasks:
     - name: install python
       raw: apt-get install -y python
 
-- name: create non-root user for hubot
-  hosts: hubot
+- name: setup base components
+  hosts: all
   user: root
   roles:
-    - role: nonroot_user
-      username: rocbot
+    - base
+    - docker
+    - vim
+    - users
 
-- name: rocbot
+- name: configure vim
+  hosts: all
+  user: geowa4
+  roles:
+    - vim
+
+- name: configure irssi
+  hosts: irc
+  user: geowa4
+  roles:
+    - irssi
+
+- name: run rocbot
   hosts: hubot
   user: rocbot
   become: yes
   roles:
-    - base
-    - vim-config
-    - docker
     - rocbot
-
-- name: rocbot user config
-  hosts: hubot
-  user: rocbot
-  roles:
-    - vim-config
+    - vim
 

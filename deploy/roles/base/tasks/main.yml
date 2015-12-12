@@ -14,5 +14,7 @@
   with_items:
     - vim
     - curl
+    - tmux
+    - irssi
     - linux-headers-4.2.0-16-generic
     - sysdig
