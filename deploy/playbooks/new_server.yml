@@ -1,0 +1,14 @@
+- name: install ansible requirements
+  hosts: all
+  user: root
+  gather_facts: no
+  tasks:
+    - name: install python
+      raw: apt-get install -y python
+
+- name: create users
+  hosts: all
+  user: root
+  roles:
+    - users
+

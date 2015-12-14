@@ -15,3 +15,13 @@
     - '{{ nonroot_users }}'
     - '{{ github_usernames }}'
 
+- name: whitelist new users for ssh
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^AllowUsers line='AllowUsers {{ nonroot_users|join(" ") }}' state=present
+  notify:
+    - restart sshd
+
+- name: disable root login
+  lineinfile: dest=/etc/ssh/sshd_config regexp=^PermitRootLogin line='PermitRootLogin no' state=present
+  notify:
+    - restart sshd
+

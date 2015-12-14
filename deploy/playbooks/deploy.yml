@@ -1,14 +1,7 @@
-- name: install ansible requirements
-  hosts: all
-  user: root
-  gather_facts: no
-  tasks:
-    - name: install python
-      raw: apt-get install -y python
-
 - name: setup base components
   hosts: all
-  user: root
+  user: geowa4
+  become: yes
   roles:
     - base
     - docker
